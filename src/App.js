@@ -6,15 +6,21 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "./Navbar";
 import Dashboard from "./Dashboard";
 function App() {
+  const user = 1;
   return (
-    // <Router>
-    //   <Navbar></Navbar>
-    //   <Switch>
-    //     <Route path="/signin" component={SignIn} />
-    //     <Route path="/signup" component={SignUp} />
-    //   </Switch>
-    // </Router>
-    <Dashboard></Dashboard>
+    <>
+      {!user ? (
+        <Router>
+          <Navbar></Navbar>
+          <Switch>
+            <Route path="/signin" component={SignIn} />
+            <Route path="/signup" component={SignUp} />
+          </Switch>
+        </Router>
+      ) : (
+        <Dashboard></Dashboard>
+      )}
+    </>
   );
 }
 

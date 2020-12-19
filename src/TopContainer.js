@@ -24,9 +24,13 @@ function TopContainer() {
           className="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey"
           onClick={openMenu}
         >
-          <i className="fa fa-bars"></i>  LinkEx
+          <i className="fa fa-bars w3-xlarge"></i>  
         </button>
-        <span className="w3-bar-item w3-right">Logo</span>
+        <span className="w3-bar-item w3-right">
+          <span className="w3-xlarge" style={{ fontFamily: "Lobster, serif" }}>
+            LinkEx
+          </span>
+        </span>
       </div>
     </div>
   );

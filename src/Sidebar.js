@@ -1,7 +1,7 @@
 import React from "react";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import SettingsIcon from "@material-ui/icons/Settings";
+import { Avatar } from "@material-ui/core";
 function Sidebar() {
   function closeMenu() {
     console.log(mySidebar, overlayBg);
@@ -21,23 +21,22 @@ function Sidebar() {
         id="mySidebar"
       >
         <br />
-        <div className="w3-container w3-row">
-          <div className="w3-col s4">
-            <img
-              src="/w3images/avatar2.png"
-              className="w3-circle w3-margin-right"
-              style={{ width: "46px" }}
-            />
+        <div
+          className="w3-container w3-row"
+          style={{ alignItems: "center", marginTop: "40px" }}
+        >
+          <div
+            className="w3-col s4 "
+            style={{ width: "46px", padding: "25px", marginRight: "30px" }}
+          >
+            <Avatar />
           </div>
-          <div className="w3-col s8 w3-bar">
+          <div style={{ marginTop: "5px" }} className="w3-col s8 w3-bar">
             <span>
-              Welcome, <strong>Mike</strong>
+              Bienvenido <strong>Usuario</strong>
             </span>
             <br />
 
-            <a href="#" className="w3-bar-item w3-button">
-              <AccountCircleIcon></AccountCircleIcon>
-            </a>
             <a href="#" className="w3-bar-item w3-button">
               <SettingsIcon></SettingsIcon>
             </a>
