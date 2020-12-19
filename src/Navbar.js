@@ -12,13 +12,13 @@ function Navbar() {
   }
   return (
     <div>
-      <div class="topnav" id="myTopnav">
-        <Link class="active">Inicio</Link>
+      <div className="topnav" id="myTopnav">
+        <Link className="active">Inicio</Link>
         <Link to="/signup">Registrate</Link>
         <Link to="/signin">Entra</Link>
 
-        <Link class="icon" href onClick={myFunction}>
-          <i class="fa fa-bars"></i>
+        <Link className="icon" href onClick={myFunction}>
+          <i className="fa fa-bars"></i>
         </Link>
       </div>
     </div>
