@@ -1,4 +1,3 @@
-import "./App.css";
 import "./Navbar";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";

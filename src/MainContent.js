@@ -23,9 +23,9 @@ function MainContent() {
         <div className="w3-grey">
           <div
             className="w3-container w3-center w3-padding w3-blue"
-            style={{ width: " 25%" }}
+            style={{ width: " 75%" }}
           >
-            +25%
+            75%
           </div>
         </div>
 
