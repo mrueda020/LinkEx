@@ -13,10 +13,9 @@ function Navbar() {
   return (
     <div>
       <div className="topnav" id="myTopnav">
-        <Link className="active">Inicio</Link>
+        <Link to="/">Inicio</Link>
         <Link to="/signup">Registrate</Link>
         <Link to="/signin">Entra</Link>
-
         <Link className="icon" href onClick={myFunction}>
           <i className="fa fa-bars"></i>
         </Link>
