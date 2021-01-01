@@ -18,15 +18,17 @@ const StartPage = () => {
   return (
     <>
       <div className="w3-container background">
-        <h2
-          style={{
-            fontFamily: "Lobster, serif",
-            color: "white",
-            fontSize: "350%",
-          }}
-        >
-          LinkEx
-        </h2>
+        <div style={{ marginTop: "55px" }}>
+          <h2
+            style={{
+              fontFamily: "Lobster, serif",
+              color: "white",
+              fontSize: "350%",
+            }}
+          >
+            LinkEx
+          </h2>
+        </div>
       </div>
       <footer
         style={{ height: "100%" }}
