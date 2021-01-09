@@ -18,8 +18,11 @@ function TopContainer() {
   }
 
   return (
-    <div>
-      <div className="w3-bar w3-top w3-black w3-large" style={{ zIndex: 4 }}>
+    <div style={{ marginBottom: "10px" }}>
+      <div
+        className="w3-bar w3-top w3-black w3-large"
+        style={{ zIndex: 4, height: "55px" }}
+      >
         <button
           className="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey"
           onClick={openMenu}

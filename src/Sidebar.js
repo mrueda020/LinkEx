@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import SettingsIcon from "@material-ui/icons/Settings";
 import { Avatar } from "@material-ui/core";
-function Sidebar() {
+import { Redirect } from "react-router-dom";
+
+function Sidebar({ userName }) {
+  const [user, setUser] = useState({ redirectToReferrer: false });
   function closeMenu() {
     console.log(mySidebar, overlayBg);
     var mySidebar = document.getElementById("mySidebar");
@@ -13,6 +16,14 @@ function Sidebar() {
     }
   }
 
+  const logOut = () => {
+    sessionStorage.setItem("userData", "");
+    sessionStorage.clear();
+    setUser({ redirectToReferrer: true });
+  };
+  if (user.redirectToReferrer) {
+    return <Redirect to="/"></Redirect>;
+  }
   return (
     <div>
       <nav
@@ -29,18 +40,18 @@ function Sidebar() {
             className="w3-col s4 "
             style={{ width: "46px", padding: "25px", marginRight: "30px" }}
           >
-            <Avatar />
+            <Avatar src={"https://www.w3schools.com/w3images/avatar2.png"} />
           </div>
           <div style={{ marginTop: "5px" }} className="w3-col s8 w3-bar">
             <span>
-              Bienvenido <strong>Usuario</strong>
+              Bienvenido <strong>{userName}</strong>
             </span>
             <br />
 
             <a href="#" className="w3-bar-item w3-button">
               <SettingsIcon></SettingsIcon>
             </a>
-            <a href="#" className="w3-bar-item w3-button">
+            <a onClick={logOut} href="#" className="w3-bar-item w3-button">
               <ExitToAppIcon />
             </a>
           </div>

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -9,7 +10,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-
+import { PostData } from "./PostData";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -46,6 +47,33 @@ const useStyles = makeStyles((theme) => ({
 function SignIn() {
   const classes = useStyles();
 
+  const [user, setUser] = useState({
+    password: "",
+    email: "",
+    redirectToReferrer: false,
+  });
+
+  const onChange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
+  const signin = () => {
+    if (user.email && user.password) {
+      PostData("login", user).then((result) => {
+        let responseJson = result;
+        if (responseJson.userData) {
+          sessionStorage.setItem("userData", JSON.stringify(responseJson));
+          setUser({ ...user, redirectToReferrer: true });
+        } else alert(result.error);
+      });
+    }
+  };
+  if (user.redirectToReferrer) {
+    return <Redirect to={"/home"} />;
+  }
+  if (sessionStorage.getItem("userData")) {
+    return <Redirect to={"/home"} />;
+  }
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -56,7 +84,7 @@ function SignIn() {
         <Typography component="h1" variant="h5">
           Inicia Sesión
         </Typography>
-        <form className={classes.form} noValidate>
+        <div className={classes.form} noValidate>
           <TextField
             variant="outlined"
             margin="normal"
@@ -67,6 +95,7 @@ function SignIn() {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={onChange}
           />
           <TextField
             variant="outlined"
@@ -78,6 +107,7 @@ function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={onChange}
           />
 
           <Button
@@ -86,10 +116,11 @@ function SignIn() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={signin}
           >
             Entrar
           </Button>
-        </form>
+        </div>
       </div>
       <Box mt={8}>
         <Copyright />

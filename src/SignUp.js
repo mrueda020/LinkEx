@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -10,7 +11,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-
+import { PostData } from "./PostData";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -44,9 +45,35 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SignUp(props) {
+function SignUp() {
+  const [user, setUser] = useState({
+    password: "",
+    email: "",
+    firstname: "",
+    lastname: "",
+    redirectToReferrer: false,
+  });
+
   const classes = useStyles();
-  console.log(props);
+
+  const signup = () => {
+    if (user.password && user.email && user.firstname && user.lastname) {
+      PostData("signup", user).then((result) => {
+        let responseJson = result;
+        if (responseJson.userData) {
+          sessionStorage.setItem("userData", JSON.stringify(responseJson));
+          setUser({ ...user, redirectToReferrer: true });
+        } else alert(result.error);
+      });
+    }
+  };
+
+  const onChange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+  if (user.redirectToReferrer || sessionStorage.getItem("userData")) {
+    return <Redirect to={"/home"} />;
+  }
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -57,18 +84,19 @@ function SignUp(props) {
         <Typography component="h1" variant="h5">
           Registro
         </Typography>
-        <form className={classes.form} noValidate>
+        <div className={classes.form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="fname"
-                name="firstName"
+                name="firstname"
                 variant="outlined"
                 required
                 fullWidth
-                id="firstName"
+                id="firstname"
                 label="Nombre"
                 autoFocus
+                onChange={onChange}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -76,10 +104,11 @@ function SignUp(props) {
                 variant="outlined"
                 required
                 fullWidth
-                id="lastName"
+                id="lastname"
                 label="Apellidos"
-                name="lastName"
+                name="lastname"
                 autoComplete="lname"
+                onChange={onChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -91,6 +120,7 @@ function SignUp(props) {
                 label="Email"
                 name="email"
                 autoComplete="email"
+                onChange={onChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -103,6 +133,7 @@ function SignUp(props) {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={onChange}
               />
             </Grid>
           </Grid>
@@ -112,10 +143,11 @@ function SignUp(props) {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={signup}
           >
             Registrate
           </Button>
-        </form>
+        </div>
       </div>
       <Box mt={5}>
         <Copyright />
