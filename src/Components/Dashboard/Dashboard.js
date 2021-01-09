@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
-import Sidebar from "./Sidebar";
-import TopContainer from "./TopContainer";
-import Main from "./MainContent";
+import Sidebar from "../Sidebar/Sidebar";
+import TopContainer from "../TopContainer/TopContainer";
+import Main from "../MainContent/MainContent";
 const useConstructor = (callBack = () => {}) => {
   const [hasBeenCalled, setHasBeenCalled] = useState(false);
   if (hasBeenCalled) return;
