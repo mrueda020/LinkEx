@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import SettingsIcon from "@material-ui/icons/Settings";
 import { Avatar } from "@material-ui/core";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 function Sidebar({ userName }) {
   const [user, setUser] = useState({ redirectToReferrer: false });
   function closeMenu() {
-    console.log(mySidebar, overlayBg);
     var mySidebar = document.getElementById("mySidebar");
     var overlayBg = document.getElementById("myOverlay");
     if (mySidebar && overlayBg) {
@@ -47,13 +46,23 @@ function Sidebar({ userName }) {
               Bienvenido <strong>{userName}</strong>
             </span>
             <br />
-
-            <a href="#" className="w3-bar-item w3-button">
-              <SettingsIcon></SettingsIcon>
-            </a>
-            <a onClick={logOut} href="#" className="w3-bar-item w3-button">
-              <ExitToAppIcon />
-            </a>
+            <div style={{ marginTop: "5px" }}>
+              <Link
+                href="#"
+                className="w3-bar-item w3-button"
+                style={{ borderRadius: "10px" }}
+              >
+                <SettingsIcon></SettingsIcon>
+              </Link>
+              <Link
+                onClick={logOut}
+                href="#"
+                className="w3-bar-item w3-button"
+                style={{ borderRadius: "10px" }}
+              >
+                <ExitToAppIcon />
+              </Link>
+            </div>
           </div>
         </div>
         <hr />
@@ -61,27 +70,27 @@ function Sidebar({ userName }) {
           <h5>Menu Principal</h5>
         </div>
         <div className="w3-bar-block">
-          <a
+          <Link
             href="#"
             className="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black"
             onClick={closeMenu}
             title="close menu"
           >
             <i className="fa fa-remove fa-fw"></i>  Cerrar
-          </a>
-          <a href="#" className="w3-bar-item w3-button w3-padding w3-blue">
+          </Link>
+          <Link href="#" className="w3-bar-item w3-button w3-padding w3-blue">
             <i className="fa fa-users fa-fw"></i>  Vista general
-          </a>
+          </Link>
 
-          <a href="#" className="w3-bar-item w3-button w3-padding">
+          <Link href="#" className="w3-bar-item w3-button w3-padding">
             <i className="fa fa-bank fa-fw"></i>  Evaluaciones
-          </a>
-          <a href="#" className="w3-bar-item w3-button w3-padding">
+          </Link>
+          <Link href="#" className="w3-bar-item w3-button w3-padding">
             <i className="fa fa-history fa-fw"></i>  Historial
-          </a>
-          <a href="#" className="w3-bar-item w3-button w3-padding">
+          </Link>
+          <Link href="#" className="w3-bar-item w3-button w3-padding">
             <i className="fa fa-cog fa-fw"></i>  Configuración
-          </a>
+          </Link>
           <br />
           <br />
         </div>
