@@ -59,13 +59,20 @@ function SignIn() {
 
   const signin = () => {
     if (user.email && user.password) {
+      console.log(user);
       PostData("login", user).then((result) => {
         let responseJson = result;
+        console.log(responseJson.userData);
         if (responseJson.userData) {
           sessionStorage.setItem("userData", JSON.stringify(responseJson));
           setUser({ ...user, redirectToReferrer: true });
-        } else alert(result.error);
+        } else console.alert(result.error);
       });
+    }
+
+    var x = document.getElementById("myTopnav");
+    if ((x.className = "topnav responsive")) {
+      x.className = "topnav";
     }
   };
   if (user.redirectToReferrer) {

@@ -1,25 +1,11 @@
 import React from "react";
-import Typography from "@material-ui/core/Typography";
-import Link from "@material-ui/core/Link";
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="#">
-        LinkEx
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
-function MainContent() {
+function MainContent({ grades }) {
   return (
-    <div>
+    <div id="Main">
       <div className="w3-container">
-        <h5>Ultimos Resultados</h5>
-        <p>Calculo</p>
+        <h5 style={{ marginTop: "25px" }}>Ultimos Resultados</h5>
+        {/* <p>Calculo</p>
         <div className="w3-grey">
           <div
             className="w3-container w3-center w3-padding w3-blue"
@@ -27,27 +13,25 @@ function MainContent() {
           >
             75%
           </div>
-        </div>
+        </div> */}
 
-        <p>Algoritmia</p>
-        <div className="w3-grey">
-          <div
-            className="w3-container w3-center w3-padding w3-blue"
-            style={{ width: "50%" }}
-          >
-            50%
-          </div>
-        </div>
-
-        <p>Bases de datos</p>
-        <div className="w3-grey">
-          <div
-            className="w3-container w3-center w3-padding w3-blue"
-            style={{ width: "75%" }}
-          >
-            75%
-          </div>
-        </div>
+        {grades.map((grade, index) => {
+          return (
+            <div key={index}>
+              <p>{grade[1]}</p>
+              <div className="w3-grey">
+                <div
+                  className={`w3-container w3-center w3-padding ${
+                    grade[2] / grade[5] > 0.6 ? "w3-green" : "w3-red"
+                  }`}
+                  style={{ width: `${(grade[2] / grade[5]) * 100}${"%"}` }}
+                >
+                  {(grade[2] / grade[5]) * 100}%
+                </div>
+              </div>
+            </div>
+          );
+        })}
       </div>
       <hr />
 
@@ -91,13 +75,6 @@ function MainContent() {
           </div>
         </div>
       </div>
-
-      <footer
-        style={{ height: "100%" }}
-        className="w3-container w3-padding-16 w3-light-grey"
-      >
-        <Copyright></Copyright>
-      </footer>
     </div>
   );
 }

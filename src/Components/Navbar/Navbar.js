@@ -16,9 +16,9 @@ function Navbar() {
         <Link to="/">Inicio</Link>
         <Link to="/signup">Registrate</Link>
         <Link to="/signin">Entra</Link>
-        <Link className="icon" href onClick={myFunction}>
+        <a className="icon" onClick={myFunction}>
           <i className="fa fa-bars"></i>
-        </Link>
+        </a>
       </div>
     </div>
   );

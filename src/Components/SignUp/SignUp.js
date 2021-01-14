@@ -57,6 +57,7 @@ function SignUp() {
   const classes = useStyles();
 
   const signup = () => {
+    console.log(user);
     if (user.password && user.email && user.firstname && user.lastname) {
       PostData("signup", user).then((result) => {
         let responseJson = result;
@@ -65,6 +66,10 @@ function SignUp() {
           setUser({ ...user, redirectToReferrer: true });
         } else alert(result.error);
       });
+    }
+    var x = document.getElementById("myTopnav");
+    if ((x.className = "topnav responsive")) {
+      x.className = "topnav";
     }
   };
 

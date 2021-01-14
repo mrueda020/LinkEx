@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import SettingsIcon from "@material-ui/icons/Settings";
 import { Avatar } from "@material-ui/core";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 function Sidebar({ userName }) {
   const [user, setUser] = useState({ redirectToReferrer: false });
@@ -47,21 +47,21 @@ function Sidebar({ userName }) {
             </span>
             <br />
             <div style={{ marginTop: "5px" }}>
-              <Link
+              <a
                 href="#"
                 className="w3-bar-item w3-button"
                 style={{ borderRadius: "10px" }}
               >
                 <SettingsIcon></SettingsIcon>
-              </Link>
-              <Link
+              </a>
+              <a
                 onClick={logOut}
                 href="#"
                 className="w3-bar-item w3-button"
                 style={{ borderRadius: "10px" }}
               >
                 <ExitToAppIcon />
-              </Link>
+              </a>
             </div>
           </div>
         </div>
@@ -70,27 +70,27 @@ function Sidebar({ userName }) {
           <h5>Menu Principal</h5>
         </div>
         <div className="w3-bar-block">
-          <Link
+          <a
             href="#"
             className="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black"
             onClick={closeMenu}
             title="close menu"
           >
             <i className="fa fa-remove fa-fw"></i>  Cerrar
-          </Link>
-          <Link href="#" className="w3-bar-item w3-button w3-padding w3-blue">
+          </a>
+          <a href="#Main" className="w3-bar-item w3-button w3-padding w3-blue">
             <i className="fa fa-users fa-fw"></i>  Vista general
-          </Link>
+          </a>
 
-          <Link href="#" className="w3-bar-item w3-button w3-padding">
+          <a href="#Evaluations" className="w3-bar-item w3-button w3-padding">
             <i className="fa fa-bank fa-fw"></i>  Evaluaciones
-          </Link>
-          <Link href="#" className="w3-bar-item w3-button w3-padding">
+          </a>
+          <a href="#" className="w3-bar-item w3-button w3-padding">
             <i className="fa fa-history fa-fw"></i>  Historial
-          </Link>
-          <Link href="#" className="w3-bar-item w3-button w3-padding">
+          </a>
+          <a href="#" className="w3-bar-item w3-button w3-padding">
             <i className="fa fa-cog fa-fw"></i>  Configuración
-          </Link>
+          </a>
           <br />
           <br />
         </div>
