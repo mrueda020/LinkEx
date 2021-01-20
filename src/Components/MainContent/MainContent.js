@@ -1,34 +1,56 @@
 import React from "react";
-
+import CachedIcon from "@material-ui/icons/Cached";
+import "./MainContent.css";
 function MainContent({ grades }) {
   return (
     <div id="Main">
       <div className="w3-container">
-        <h5 style={{ marginTop: "25px" }}>Ultimos Resultados</h5>
-        {/* <p>Calculo</p>
-        <div className="w3-grey">
-          <div
-            className="w3-container w3-center w3-padding w3-blue"
-            style={{ width: " 75%" }}
+        <div className="items">
+          <h5>Ultimos Resultados</h5>
+          <a
+            href="#"
+            className="w3-bar-item w3-button"
+            style={{
+              borderRadius: "10px",
+              alignContent: "center",
+              marginLeft: "10px",
+              marginTop: "5px",
+            }}
           >
-            75%
-          </div>
-        </div> */}
+            <CachedIcon></CachedIcon>
+          </a>
+        </div>
 
         {grades.map((grade, index) => {
           return (
             <div key={index}>
-              <p>{grade[1]}</p>
-              <div className="w3-grey">
-                <div
-                  className={`w3-container w3-center w3-padding ${
-                    grade[2] / grade[5] > 0.6 ? "w3-green" : "w3-red"
-                  }`}
-                  style={{ width: `${(grade[2] / grade[5]) * 100}${"%"}` }}
-                >
-                  {(grade[2] / grade[5]) * 100}%
-                </div>
-              </div>
+              {grade[3] ? (
+                <>
+                  <h5>{grade[1]}</h5>
+                  <div className="w3-grey">
+                    <div
+                      className="w3-container w3-center w3-padding w3-blue"
+                      style={{ width: "100%" }}
+                    >
+                      Pendiente por realizar
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <h5>{grade[1]}</h5>
+                  <div className="w3-grey">
+                    <div
+                      className={`w3-container w3-center w3-padding ${
+                        grade[2] / grade[5] > 0.6 ? "w3-green" : "w3-red"
+                      }`}
+                      style={{ width: `${(grade[2] / grade[5]) * 100}${"%"}` }}
+                    >
+                      {(grade[2] / grade[5]) * 100}%
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           );
         })}
@@ -43,7 +65,7 @@ function MainContent({ grades }) {
             <h4>
               John
               <span className="w3-opacity w3-medium w3-margin-left">
-                Sep 29, 2014, 9:12 PM
+                Sep 29, 20120, 9:12 PM
               </span>
             </h4>
             <p>
@@ -62,7 +84,7 @@ function MainContent({ grades }) {
             <h4>
               Bo
               <span className="w3-opacity w3-medium w3-margin-left">
-                Sep 28, 2014, 10:15 PM
+                Sep 28, 2020, 10:15 PM
               </span>
             </h4>
             <p>

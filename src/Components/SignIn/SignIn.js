@@ -66,7 +66,7 @@ function SignIn() {
         if (responseJson.userData) {
           sessionStorage.setItem("userData", JSON.stringify(responseJson));
           setUser({ ...user, redirectToReferrer: true });
-        } else console.alert(result.error);
+        } else alert(result.error);
       });
     }
 

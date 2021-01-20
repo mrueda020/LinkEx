@@ -1,8 +1,55 @@
-import React from "react";
-import { useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { PostData } from "../Services/PostData";
 
-function Evaluations({ grades }) {
+function Evaluations({ userEmail, grades }) {
+  const refContainer = useRef(null);
+  const [examForm, setExamForm] = useState([]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = new FormData(refContainer.current);
+    data.append("email", userEmail);
+    let object = {};
+    data.forEach((value, key) => (object[key] = value));
+    closeExam();
+    object = JSON.stringify(object);
+    console.log(object);
+    evaluateExam(JSON.parse(object));
+
+    window.location.reload(false);
+  };
+
+  const evaluateExam = (object) => {
+    console.log(object);
+    PostData("evaluateExam", object).then((result) => {
+      if (result) {
+        console.log("examen");
+      }
+    });
+  };
+
+  useEffect(() => {
+    refContainer.current.focus();
+  });
+
+  const closeExam = () => {
+    document.getElementById("id01").style.display = "none";
+  };
+
+  const displayExam = (examid, e) => {
+    e.preventDefault();
+    let exam = { id: examid };
+    getExam(exam);
+  };
+
+  const getExam = (exam) => {
+    PostData("getExam", exam).then((result) => {
+      if (result) {
+        setExamForm(result.exam);
+      }
+    });
+  };
+
   return (
     <div id="Evaluations">
       <table className="w3-table-all">
@@ -15,18 +62,28 @@ function Evaluations({ grades }) {
           </tr>
         </thead>
         <tbody>
-          {grades.map((exam, index) => {
+          {grades.map((grade, index) => {
             return (
               <tr className="w3-hover-green" key={index}>
-                <td>{exam[0]}</td>
-                <td>{exam[1]}</td>
-                <td>{exam[2]}</td>
+                <td>{grade[0]}</td>
+                <td>{grade[1]}</td>
+                <td>{(grade[2] / grade[5]) * 10}</td>
                 <td>
-                  {exam[3] ? (
+                  {grade[3] ? (
                     <>
-                      <button>Iniciar Examen</button>
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          displayExam(grade[6], e);
+                          document.getElementById("id01").style.display =
+                            "block";
+                        }}
+                        className="w3-button w3-light-blue"
+                      >
+                        Iniciar Examen
+                      </button>
                     </>
-                  ) : exam[4] === "0" ? (
+                  ) : grade[4] === "0" ? (
                     <>
                       <button className="w3-button w3-red w3-disabled w3-hover-red">
                         Reintentar examen
@@ -34,7 +91,15 @@ function Evaluations({ grades }) {
                     </>
                   ) : (
                     <>
-                      <button className="w3-button w3-black ">
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          displayExam(grade[6], e);
+                          document.getElementById("id01").style.display =
+                            "block";
+                        }}
+                        className="w3-button w3-black "
+                      >
                         Reintentar examen
                       </button>
                     </>
@@ -45,6 +110,83 @@ function Evaluations({ grades }) {
           })}
         </tbody>
       </table>
+
+      <div id="id01" className="w3-modal">
+        <div className="w3-modal-content w3-card-4">
+          <header className="w3-container w3-blue">
+            <span onClick={closeExam} className="w3-button w3-display-topright">
+              x
+            </span>
+            <h2>Examen</h2>
+          </header>
+          <div className="w3-container w3-card-4">
+            <form ref={refContainer} onSubmit={handleSubmit}>
+              {examForm.map((exam, index) => {
+                return (
+                  <>
+                    <div key={index}>
+                      <h5>{exam[0]}</h5>
+                      <p>
+                        <input
+                          className="w3-radio"
+                          type="radio"
+                          name={`ans${index}`}
+                          value={`${exam[1]}`}
+                          required
+                        />
+                        &nbsp;
+                        <label>{exam[1]}</label>
+                      </p>
+                      <p>
+                        <input
+                          className="w3-radio"
+                          type="radio"
+                          name={`ans${index}`}
+                          value={`${exam[2]}`}
+                          required
+                        />
+                        &nbsp;
+                        <label>{exam[2]}</label>
+                      </p>
+                      <p>
+                        <input
+                          className="w3-radio"
+                          type="radio"
+                          name={`ans${index}`}
+                          value={`${exam[3]}`}
+                          required
+                        />
+                        &nbsp;
+                        <label>{exam[3]}</label>
+                      </p>
+                      <p>
+                        <input
+                          className="w3-radio"
+                          type="radio"
+                          name={`ans${index}`}
+                          value={`${exam[4]}`}
+                          required
+                        />
+                        &nbsp;
+                        <label>{exam[4]}</label>
+                      </p>
+                    </div>
+                  </>
+                );
+              })}
+              <br></br>
+              <p>
+                <button type="submit" className="w3-btn w3-green">
+                  Enviar
+                </button>
+              </p>
+            </form>
+          </div>
+          <footer className="w3-container w3-blue">
+            <p>LinkEx</p>
+          </footer>
+        </div>
+      </div>
     </div>
   );
 }

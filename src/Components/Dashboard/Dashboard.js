@@ -37,7 +37,7 @@ function Dashboard() {
 
   useEffect(() => {
     var data = JSON.parse(sessionStorage.getItem("userData"));
-    setUser({ ...user, name: data.userData.name });
+    setUser({ ...user, name: data.userData.nombre });
 
     PostData("getGrades", user).then((result) => {
       let responseJson = result;
@@ -74,7 +74,7 @@ function Dashboard() {
         style={{ marginLeft: " 300px", marginTop: "43px" }}
       >
         <Main grades={grades}></Main>
-        <Evaluations grades={grades}></Evaluations>
+        <Evaluations userEmail={user.email} grades={grades}></Evaluations>
         <footer
           style={{ height: "100%" }}
           className="w3-container w3-padding-16 w3-grey"
