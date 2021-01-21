@@ -4,11 +4,13 @@ import { PostData } from "../Services/PostData";
 function Evaluations({ userEmail, grades }) {
   const refContainer = useRef(null);
   const [examForm, setExamForm] = useState([]);
-
+  const [idExamen,setIdExamen] = useState("");
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = new FormData(refContainer.current);
     data.append("email", userEmail);
+    data.append("idExamen",idExamen);
     let object = {};
     data.forEach((value, key) => (object[key] = value));
     closeExam();
@@ -16,21 +18,22 @@ function Evaluations({ userEmail, grades }) {
     console.log(object);
     evaluateExam(JSON.parse(object));
 
-    window.location.reload(false);
+    // window.location.reload(false);
   };
 
   const evaluateExam = (object) => {
-    console.log(object);
+    console.log(object)
     PostData("evaluateExam", object).then((result) => {
       if (result) {
-        console.log("examen");
+        console.log(result);
       }
     });
   };
 
   useEffect(() => {
     refContainer.current.focus();
-  });
+    console.log(idExamen);
+  },[idExamen]);
 
   const closeExam = () => {
     document.getElementById("id01").style.display = "none";
@@ -74,6 +77,7 @@ function Evaluations({ userEmail, grades }) {
                       <button
                         onClick={(e) => {
                           e.preventDefault();
+                          setIdExamen(grade[6]);
                           displayExam(grade[6], e);
                           document.getElementById("id01").style.display =
                             "block";
@@ -94,6 +98,7 @@ function Evaluations({ userEmail, grades }) {
                       <button
                         onClick={(e) => {
                           e.preventDefault();
+                          setIdExamen(grade[6]);
                           displayExam(grade[6], e);
                           document.getElementById("id01").style.display =
                             "block";
@@ -129,7 +134,7 @@ function Evaluations({ userEmail, grades }) {
                       <p>
                         <input
                           className="w3-radio"
-                          type="radio"
+                          setIdExamen  type="radio"
                           name={`ans${index}`}
                           value={`${exam[1]}`}
                           required
