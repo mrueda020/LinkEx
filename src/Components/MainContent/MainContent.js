@@ -42,7 +42,7 @@ function MainContent({ grades }) {
                   <div className="w3-grey">
                     <div
                       className={`w3-container w3-center w3-padding ${
-                        grade[2] / grade[5] > 0.6 ? "w3-green" : "w3-red"
+                        grade[2] / grade[5] >= 0.6 ? "w3-green" : "w3-red"
                       }`}
                       style={{ width: `${(grade[2] / grade[5]) * 100}${"%"}` }}
                     >
