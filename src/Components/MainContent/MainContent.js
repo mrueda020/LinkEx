@@ -9,12 +9,15 @@ function MainContent({ grades }) {
           <h5>Ultimos Resultados</h5>
           <a
             href="#"
+            onClick={() => {
+              window.location.reload(false);
+            }}
             className="w3-bar-item w3-button"
             style={{
               borderRadius: "10px",
               alignContent: "center",
               marginLeft: "10px",
-              marginTop: "5px",
+              marginTop: "5px"
             }}
           >
             <CachedIcon></CachedIcon>
@@ -69,10 +72,8 @@ function MainContent({ grades }) {
               </span>
             </h4>
             <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae
-              quibusdam esse voluptates ab in maxime recusandae veritatis vero
-              sit sed, totam placeat ex fuga quae quisquam, odio nam corporis
-              sapiente?
+              Realiza los examenes siguientes para reforzar tus conocimientos en
+              programacion, estos les serviran de practica.
             </p>
             <br />
           </div>
@@ -82,16 +83,15 @@ function MainContent({ grades }) {
           <div className="w3-col m2 text-center"></div>
           <div className="w3-col m10 w3-container">
             <h4>
-              Bo
+              Bob
               <span className="w3-opacity w3-medium w3-margin-left">
                 Sep 28, 2020, 10:15 PM
               </span>
             </h4>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum
-              asperiores maiores quidem quae ex voluptatum rem necessitatibus
-              neque quo perspiciatis veritatis enim, mollitia ipsam aut quod
-              molestias repellat odio debitis.
+              El proximo día Lunes se subiran a la plataforma los examenes para
+              reforzar los conocimientos de Liderazgos y Desarrollo Profesional
+              asi que repasen los conceptos vistos en clase.
             </p>
             <br />
           </div>

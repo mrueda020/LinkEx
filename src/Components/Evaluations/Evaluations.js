@@ -6,7 +6,7 @@ function Evaluations({ userEmail, grades }) {
   const [examForm, setExamForm] = useState([]);
   const [idExamen, setExamID] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     let id = idExamen;
     const data = new FormData(refContainer.current);
@@ -22,9 +22,9 @@ function Evaluations({ userEmail, grades }) {
     evaluateExam(JSON.parse(object));
   };
 
-  const evaluateExam = (object) => {
+  const evaluateExam = object => {
     console.log(object);
-    PostData("evaluateExam", object).then((result) => {
+    PostData("evaluateExam", object).then(result => {
       if (result) {
         console.log(result);
       }
@@ -45,8 +45,8 @@ function Evaluations({ userEmail, grades }) {
     getExam(exam);
   };
 
-  const getExam = (exam) => {
-    PostData("getExam", exam).then((result) => {
+  const getExam = exam => {
+    PostData("getExam", exam).then(result => {
       if (result) {
         setExamID(exam.id);
         setExamForm(result.exam);
@@ -76,7 +76,7 @@ function Evaluations({ userEmail, grades }) {
                   {grade[3] ? (
                     <>
                       <button
-                        onClick={(e) => {
+                        onClick={e => {
                           e.preventDefault();
                           displayExam(grade[6], e);
                           document.getElementById("id01").style.display =
@@ -96,7 +96,7 @@ function Evaluations({ userEmail, grades }) {
                   ) : (
                     <>
                       <button
-                        onClick={(e) => {
+                        onClick={e => {
                           e.preventDefault();
                           displayExam(grade[6], e);
                           document.getElementById("id01").style.display =
@@ -116,14 +116,14 @@ function Evaluations({ userEmail, grades }) {
       </table>
 
       <div id="id01" className="w3-modal">
-        <div className="w3-modal-content w3-card-4">
+        <div className="w3-modal-content w3-animate-zoom w3-card-4">
           <header className="w3-container w3-blue">
             <span onClick={closeExam} className="w3-button w3-display-topright">
               x
             </span>
             <h2>Examen</h2>
           </header>
-          <div className="w3-container w3-card-4">
+          <div className="w3-container w3-card-4 w3-animate-zoom">
             <form ref={refContainer} onSubmit={handleSubmit}>
               {examForm.map((exam, index) => {
                 return (

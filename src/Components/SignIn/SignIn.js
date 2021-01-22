@@ -24,24 +24,24 @@ function Copyright() {
   );
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
+    alignItems: "center"
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.secondary.main
   },
   form: {
     width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(1)
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
+    margin: theme.spacing(3, 0, 2)
+  }
 }));
 
 function SignIn() {
@@ -50,25 +50,25 @@ function SignIn() {
   const [user, setUser] = useState({
     password: "",
     email: "",
-    redirectToReferrer: false,
+    redirectToReferrer: false
   });
 
-  const onChange = (e) => {
+  const onChange = e => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
   const signin = () => {
-    if (user.email && user.password) {
-      console.log(user);
-      PostData("login", user).then((result) => {
-        let responseJson = result;
-        console.log(responseJson.userData);
-        if (responseJson.userData) {
-          sessionStorage.setItem("userData", JSON.stringify(responseJson));
-          setUser({ ...user, redirectToReferrer: true });
-        } else alert(result.error);
-      });
-    }
+    console.log(user);
+    PostData("login", user).then(result => {
+      let responseJson = result;
+      console.log(responseJson.userData);
+      if (responseJson.userData) {
+        sessionStorage.setItem("userData", JSON.stringify(responseJson));
+        setUser({ ...user, redirectToReferrer: true });
+      } else {
+        document.getElementById("id01").style.display = "block";
+      }
+    });
 
     var x = document.getElementById("myTopnav");
     if ((x.className = "topnav responsive")) {
@@ -132,6 +132,24 @@ function SignIn() {
       <Box mt={8}>
         <Copyright />
       </Box>
+      <div id="id01" className="w3-modal">
+        <div className="w3-modal-content">
+          <div
+            className="w3-container w3-black w3-animate-opacity"
+            style={{ textAlign: "center" }}
+          >
+            <span
+              onClick={() => {
+                document.getElementById("id01").style.display = "none";
+              }}
+              className="w3-button w3-display-topright"
+            >
+              X
+            </span>
+            <p style={{ fontSize: "20px" }}>Email o contraseña no validos.</p>
+          </div>
+        </div>
+      </div>
     </Container>
   );
 }

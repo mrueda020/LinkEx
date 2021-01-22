@@ -25,24 +25,24 @@ function Copyright() {
   );
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
+    alignItems: "center"
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.secondary.main
   },
   form: {
     width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
+    marginTop: theme.spacing(3)
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
+    margin: theme.spacing(3, 0, 2)
+  }
 }));
 
 function SignUp() {
@@ -51,29 +51,29 @@ function SignUp() {
     email: "",
     firstname: "",
     lastname: "",
-    redirectToReferrer: false,
+    redirectToReferrer: false
   });
 
   const classes = useStyles();
 
   const signup = () => {
     console.log(user);
-    if (user.password && user.email && user.firstname && user.lastname) {
-      PostData("signup", user).then((result) => {
-        let responseJson = result;
-        if (responseJson.userData) {
-          sessionStorage.setItem("userData", JSON.stringify(responseJson));
-          setUser({ ...user, redirectToReferrer: true });
-        } else alert(result.error);
-      });
-    }
+    PostData("signup", user).then(result => {
+      let responseJson = result;
+      if (responseJson.userData) {
+        sessionStorage.setItem("userData", JSON.stringify(responseJson));
+        setUser({ ...user, redirectToReferrer: true });
+      } else {
+        document.getElementById("id01").style.display = "block";
+      }
+    });
     var x = document.getElementById("myTopnav");
     if ((x.className = "topnav responsive")) {
       x.className = "topnav";
     }
   };
 
-  const onChange = (e) => {
+  const onChange = e => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
   if (user.redirectToReferrer || sessionStorage.getItem("userData")) {
@@ -157,6 +157,27 @@ function SignUp() {
       <Box mt={5}>
         <Copyright />
       </Box>
+
+      <div id="id01" className="w3-modal">
+        <div className="w3-modal-content">
+          <div
+            className="w3-container w3-black w3-animate-opacity"
+            style={{ textAlign: "center" }}
+          >
+            <span
+              onClick={() => {
+                document.getElementById("id01").style.display = "none";
+              }}
+              className="w3-button w3-display-topright"
+            >
+              X
+            </span>
+            <p style={{ fontSize: "20px" }}>
+              Llena los datos correspondientes.
+            </p>
+          </div>
+        </div>
+      </div>
     </Container>
   );
 }
